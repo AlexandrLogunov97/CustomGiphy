@@ -13,17 +13,34 @@ div.main{
 .el{
     margin-bottom: 10px;
 }
-.item{
-  margin: 10px;
-    background-color: blue;
-}
-#listofthings{
+
+#grid{
     padding-left: 0px;
     width: 100%;
    }
-   
-   
-   #listofthings li{
+#grid li{
     width: 25%;
     display: inline-block;
-   }
+}
+.res:hover .favorite{
+    display:block;
+}
+.favorite{
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display:none;
+}
+.add{
+    width: 200px;
+    height: 40px;
+    z-index: 200;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

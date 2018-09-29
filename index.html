@@ -9,34 +9,35 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="js/Http.js"></script>
-    <script src="js/GiphyClient.js"></script>
-
+    <script src="Http.js"></script>
+    <script src="SimpleDB.js"></script>
+    <script src="Favorite.js"></script>
+    <script src="GiphyClient.js"></script>
+    <script src="GalleryGenearator.js"></script>
     <script src="main.js"></script>
 </head>
 
 <body onload="load()">
     <div class="main">
         <div class="header">
-            <input type="text" placeholder="Search..." class='form-control el'>
+            <div class="dropdown">
+                <input id="search" onchange="search()" onfocus="searchFocused()" autocomplete="off" type="text" placeholder="Search..." class='form-control el'>
+                <div class="dropdown-menu" id="autoComplete" style="width: 100%;">
+                    <button class="dropdown-item">Action</button> 
+                    <button class="dropdown-item">Action</button> 
+                    <button class="dropdown-item">Action</button> 
+                    <button class="dropdown-item">Action</button> 
+                    <button class="dropdown-item">Action</button> 
+                </div>
+            </div>
             <div class="max">
-                <button id='gifs' class="btn btn-primary el eq">first</button>
-                <button id="stickers" class="btn btn-secondary el eq">second</button>
-                <button id="favorites" class="btn btn-secondary el eq">thrid</button>
+                <button id='gifs' name="mode" class="btn btn-secondary el eq" onclick="selectMode('gifs')">Gif's</button>
+                <button id="stickers" name="mode" class="btn btn-secondary el eq" onclick="selectMode('stickers')">Stickers</button>
+                <button id="favorites" name="mode" class="btn btn-primary el eq" hidden onclick="selectMode('favorites')">Favorites</button>
             </div>
         </div>
         <div id="content" class="content el">
-            <ul id="listofthings">
-                <li>
-                    <div class="card" style="margin: 10px">
-                        <img class="card-img-top" style="width: 100px; height: 100px" src=".../100px180/" alt="Card image cap">
-                        <div class="card-body">
-                            <a href="#" style="float: right;" class="btn btn-primary btn-sm">
-                                <span class="add">+</span>
-                            </a>
-                        </div>
-                    </div>
-                </li>
+            <ul id="grid">
             </ul>
         </div>
     </div>
