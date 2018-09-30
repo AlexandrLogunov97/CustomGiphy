@@ -27,18 +27,17 @@ function search() {
         document.getElementById('gifs').className = 'btn btn-primary el eq';
         selectedMode = 'gifs';
     }
-
-    document.getElementById('autoComplete').style.display = 'none';
     var query = document.getElementById('search').value;
     if (query != null || query != undefined) {
         document.getElementById('grid').innerHTML = '';
-        Autocomplate.AddAutofield(query,false);
+        Autocomplete.AddAutofield(query,false);
         client.Load(selectedMode, query, offest, (response) => {
             response.data.forEach((value) => {
                 GalleryGenerator.CreateItem(value.id, value.images.downsized_large.url);
             });
         });
     }
+    document.getElementById('autoComplete').style.display = 'none';
 }
 function addFavorite() {
     var element = document.getElementById(event.srcElement.id);
@@ -69,7 +68,7 @@ function searchFocused() {
     document.getElementById('autoComplete').style.display = 'block';
     console.log()
     if(document.getElementById('search').value.length === 0)
-        Autocomplate.GenerateFavoritesAutofields();
+        Autocomplete.GenerateFavoritesAutofields();
 }
 function searchBlured() {
     
@@ -82,22 +81,22 @@ function setSearch(value){
 }
 function addFavoriteSearch(value){
     //document.getElementById(value).outerHTML='';
-    Autocomplate.SetFavoriteautofield(value);
+    Autocomplete.SetFavoriteAutofield(value);
     document.getElementById('search').focus();
     
 }
 function removeFavoriteSearch(value,field){
+    Autocomplete.RemoveFavoriteAutofield(field);
     document.getElementById(value).outerHTML='';
-    Autocomplate.RemoveFavoriteAutofield(field);
     document.getElementById('search').focus();
 }
 function setAutoCompete(){
     if(document.getElementById('search').value.length>0)
     {
-        Autocomplate.GenerateAutofields();
+        Autocomplete.GenerateAutofields();
     }
     else{
-        Autocomplate.GenerateFavoritesAutofields();
+        Autocomplete.GenerateFavoritesAutofields();
     }
 }
 function load() {

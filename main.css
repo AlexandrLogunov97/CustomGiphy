@@ -15,6 +15,7 @@ div.main{
 }
 .add-favorite{
     float: right; 
+    text-align: center;
     width: 5%;
 }
 .search-help{
