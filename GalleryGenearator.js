@@ -1,3 +1,4 @@
+let start_index=3;
 class GalleryGenerator{
     constructor(){
     }   
@@ -7,9 +8,8 @@ class GalleryGenerator{
 
         var item=document.createElement('div');
         item.className='card res';
-        item.style.marginRight='10px';
         item.style.marginBottom='10px';
-
+        item.style.marginRight='10px';
         var img=document.createElement('img');
         img.className='card-img-top fa';
         img.src=url;

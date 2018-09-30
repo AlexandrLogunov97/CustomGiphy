@@ -11,25 +11,30 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="Http.js"></script>
     <script src="SimpleDB.js"></script>
+    <script src="Autocomplete.js"></script>
     <script src="Favorite.js"></script>
     <script src="GiphyClient.js"></script>
     <script src="GalleryGenearator.js"></script>
     <script src="main.js"></script>
 </head>
 
-<body onload="load()">
+<body onload="load()" onscroll="scrollLoad()" onmousedown="searchBlured()">
     <div class="main">
         <div class="header">
             <div class="dropdown">
-                <input id="search" onchange="search()" onfocus="searchFocused()" autocomplete="off" type="text" placeholder="Search..." class='form-control el'>
+                <input id="search" onchange="search()" onkeyup="setAutoCompete()" onfocus="searchFocused()" autocomplete="off" type="text"
+                    placeholder="Search..." class='form-control el'>
                 <div class="dropdown-menu" id="autoComplete" style="width: 100%;">
-                    <button class="dropdown-item">Action</button> 
-                    <button class="dropdown-item">Action</button> 
-                    <button class="dropdown-item">Action</button> 
-                    <button class="dropdown-item">Action</button> 
-                    <button class="dropdown-item">Action</button> 
+                    <div class="dropdown-item search-help" >
+                        <label class="search-field" onclick="alert('div')">Item</label>
+                        <button onclick="l()" class="btn btn-secondary add-favorite">+</button>
+                    </div>
                 </div>
             </div>
+            <select title="Items" class="dropdown-menu" style="width: 100%; max-height: 200px">
+                <option class="dropdown-item" value="Item">Item</option>
+
+            </select>
             <div class="max">
                 <button id='gifs' name="mode" class="btn btn-secondary el eq" onclick="selectMode('gifs')">Gif's</button>
                 <button id="stickers" name="mode" class="btn btn-secondary el eq" onclick="selectMode('stickers')">Stickers</button>

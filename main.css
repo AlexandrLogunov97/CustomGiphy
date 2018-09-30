@@ -13,7 +13,19 @@ div.main{
 .el{
     margin-bottom: 10px;
 }
-
+.add-favorite{
+    float: right; 
+    width: 5%;
+}
+.search-help{
+    height: 50px;
+}
+.search-field{
+    height: 50px;
+    width: 95%; 
+    top: 50%;
+    vertical-align: middle;
+}
 #grid{
     padding-left: 0px;
     width: 100%;

@@ -1,6 +1,7 @@
 class GiphyClient {
     constructor() {
         this.limit = 28;
+        this.offset = 0;
         this.dbName = 'favorites';
         SimpleDB.Create(this.dbName);
         this.items = [];
@@ -8,9 +9,17 @@ class GiphyClient {
             this.items = items;
         });
     }
+
     Load(type, query, offset = 0, callBack) {
-        var result = null;
+        this.offset = 0;
         Http.Get(`http://api.giphy.com/v1/${type}/search?q=${query}&api_key=${apiKey}&offset=${offset}&limit=${this.limit}`, (response) => {
+
+            callBack(JSON.parse(response));
+        });
+    }
+    Preload(type, query, callBack) {
+        this.offset += this.limit;
+        Http.Get(`http://api.giphy.com/v1/${type}/search?q=${query}&api_key=${apiKey}&offset=${this.offset}&limit=${this.limit}`, (response) => {
 
             callBack(JSON.parse(response));
         });
@@ -18,8 +27,25 @@ class GiphyClient {
     get CountFavorites() {
         return this.items.length;
     }
-    ShowFavorites() {
-        return this.items;
+    ShowFavorites(callBack) {
+        SimpleDB.GetItems(this.dbName, callBack);
+    }
+    RemoveFavorite(favorite) {
+        SimpleDB.GetItems(this.dbName, (items) => {
+            var item = this.items.find(x => {
+                if (x.id === favorite.id)
+                    return x;
+            });
+            if (item) {
+                var index = items.indexOf(items.find(x=>{ return x.id===favorite.id?x:null; }));
+                console.log(index);
+                if (index > -1) {
+                    console.log(items.splice(index, 1));
+                }
+                this.items=items;
+            }
+            SimpleDB.Save(this.dbName, items);
+        });
     }
     AddFavorite(favorite) {
         SimpleDB.GetItems(this.dbName, (items) => {
@@ -30,14 +56,16 @@ class GiphyClient {
                 SimpleDB.Save(this.dbName, items);
             }
             else {
-                if(this.items.find(x=>{
-                    if(x.id===favorite.id)
-                        return false
-                }))
-                {
+                var item = this.items.find(x => {
+                    if (x.id === favorite.id)
+                        return x;
+                });
+                console.log(item);
+                if (!item) {
                     items.push(favorite);
-                    SimpleDB.Save(this.dbName, items);
+                    this.items.push(favorite);
                 }
+                SimpleDB.Save(this.dbName, items);
             }
         });
     }
