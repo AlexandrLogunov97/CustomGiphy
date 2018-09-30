@@ -83,11 +83,13 @@ function setSearch(value){
 function addFavoriteSearch(value){
     //document.getElementById(value).outerHTML='';
     Autocomplate.SetFavoriteautofield(value);
+    document.getElementById('search').focus();
     
 }
 function removeFavoriteSearch(value,field){
     document.getElementById(value).outerHTML='';
     Autocomplate.RemoveFavoriteAutofield(field);
+    document.getElementById('search').focus();
 }
 function setAutoCompete(){
     if(document.getElementById('search').value.length>0)
