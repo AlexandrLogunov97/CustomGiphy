@@ -23,6 +23,15 @@ class SimpleDB{
         });
 
     }
+    static SaveSync(key,items){
+        var items=JSON.stringify(items);
+        localStorage.setItem(key,items);
+    }
+    static GetItemsSync(key){
+        var items=localStorage.getItem(key);
+        return JSON.parse(items);
+    }
+
     static GetItems(key,callback){
         let promise=new Promise((resolve,reject)=>{
             var items=localStorage.getItem(key);

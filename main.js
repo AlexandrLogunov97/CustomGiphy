@@ -30,7 +30,6 @@ function search() {
     var query = document.getElementById('search').value;
     if (query.length > 0) {
         document.getElementById('grid').innerHTML = '';
-        Autocomplete.AddAutofield(query, false);
         client.Load(selectedMode, query, offest, (response) => {
             response.data.forEach((value) => {
                 GalleryGenerator.CreateItem(value.id, value.images.downsized_large.url);
@@ -65,10 +64,20 @@ function loadFavorites() {
 function searchFocused() {
     var element = event.srcElement;
     document.getElementById('autoComplete').style.display = 'block';
-    if (document.getElementById('search').value.length <= 0)
+    if (!document.getElementById('search').value)
         Autocomplete.GenerateFavoritesAutofields();
     else
         Autocomplete.GenerateAutofields();
+}
+function searchClick(){
+    if(document.getElementById('search').value.length>0){
+        document.getElementById('autoComplete').style.display = 'block';
+        Autocomplete.GenerateAutofields();
+    }
+    else{
+        document.getElementById('autoComplete').style.display = 'block';
+        Autocomplete.GenerateFavoritesAutofields();
+    }
 }
 function setSearch(value) {
     if (value) {
@@ -78,15 +87,15 @@ function setSearch(value) {
     }
 }
 function addFavoriteSearch(value) {
-    if (document.getElementById('search').value.length > 0)
+    if (document.getElementById('search').value)
         document.getElementById(event.srcElement.id).innerHTML = '-';
-    debugger;
+
     Autocomplete.SetFavoriteAutofield(value);
     document.getElementById('search').focus();
 }
 function removeFavoriteSearch(value, field) {
 
-    if (document.getElementById('search').value.length > 0)
+    if (document.getElementById('search').value)
         document.getElementById(event.srcElement.id).innerHTML = '+';
     else
         document.getElementById(value).outerHTML = '';
@@ -94,13 +103,16 @@ function removeFavoriteSearch(value, field) {
     document.getElementById('search').focus();
 }
 function setAutoCompete() {
-    if (document.getElementById('search').value.length > 0) {
+    if (document.getElementById('search').value) {
         Autocomplete.GenerateAutofields();
     }
     else {
         Autocomplete.GenerateFavoritesAutofields();
     }
     if (event.keyCode === 13) {
+        var query = document.getElementById('search').value;
+        if(query.length>0 || query)
+            Autocomplete.AddAutofield(query, false);
         document.getElementById('autoComplete').style.display = 'none';
     }
 }
