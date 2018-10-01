@@ -101,7 +101,7 @@ class Autocomplete {
     static AddAutofield(field, flag) {
         SimpleDB.GetItems('autocomplete', (items) => {
             var item = items.find(x => {
-                if (this.IsInclude(x.field, field)) {
+                if (x.toString().toLowerCase()===field.toString().toLowerCase()) {
                     return x;
                 }
             });
