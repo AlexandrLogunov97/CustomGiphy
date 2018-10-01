@@ -80,6 +80,7 @@ function setSearch(value) {
 function addFavoriteSearch(value) {
     if (document.getElementById('search').value.length > 0)
         document.getElementById(event.srcElement.id).innerHTML = '-';
+    debugger;
     Autocomplete.SetFavoriteAutofield(value);
     document.getElementById('search').focus();
 }
