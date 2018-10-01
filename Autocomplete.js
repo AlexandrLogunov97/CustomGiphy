@@ -36,7 +36,7 @@ class Autocomplete {
         //localStorage.setItem('autocomplete',JSON.stringify([]));
         var element = document.getElementById(field);
         element.innerHTML = '';
-        i = 0;
+        
         SimpleDB.GetItems('autocomplete', (items) => {
             items.forEach(item => {
                 if (item.favorite == true)
@@ -80,19 +80,18 @@ class Autocomplete {
         var element = document.getElementById(field);
         element.innerHTML = '';
         var query = document.getElementById('search').value;
-        i = 0;
+        
         var counter = 0;
         SimpleDB.GetItems('autocomplete', (items) => {
             if (items.length > 0) {
-                if (counter <= 5) {
                     items.forEach(item => {
                         if (this.IsInclude(item.field, query)) {
-                            element.appendChild(this.CreateField(item));
-                            counter++;
+                            if(counter<5){
+                                element.appendChild(this.CreateField(item));
+                                counter++;
+                            }
                         }
                     });
-                }
- 
             }
         });
     }

@@ -66,29 +66,29 @@ function loadFavorites() {
 function searchFocused() {
     var element=event.srcElement;
     document.getElementById('autoComplete').style.display = 'block';
-    console.log()
     if(document.getElementById('search').value.length === 0)
         Autocomplete.GenerateFavoritesAutofields();
 }
 function searchBlured() {
     
-        //document.getElementById('autoComplete').style.display = 'none';
+        
 }
 function setSearch(value){
     document.getElementById('search').value=value;
-    document.getElementById('autoComplete').style.display = 'none';
     search();
+    document.getElementById('autoComplete').style.display = 'none';
+
 }
 function addFavoriteSearch(value){
     //document.getElementById(value).outerHTML='';
     Autocomplete.SetFavoriteAutofield(value);
-    document.getElementById('search').focus();
+    //document.getElementById('search').focus();
     
 }
 function removeFavoriteSearch(value,field){
     Autocomplete.RemoveFavoriteAutofield(field);
     document.getElementById(value).outerHTML='';
-    document.getElementById('search').focus();
+    //document.getElementById('search').focus();
 }
 function setAutoCompete(){
     if(document.getElementById('search').value.length>0)
