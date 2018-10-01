@@ -101,18 +101,8 @@ function setAutoCompete(){
         document.getElementById('autoComplete').style.display = 'none';
     }
 }
-function setAutoCompete(){
-    if(document.getElementById('search').value.length>0)
-    {
-        Autocomplete.GenerateAutofields();
-    }
-    else{
-        Autocomplete.GenerateFavoritesAutofields();
-    }
-    if(event.keyCode===13)
-    {
-        document.getElementById('autoComplete').style.display = 'none';
-    }
+function setAutoCompete2(){
+ 
 }
 function load() {
     if (client.CountFavorites > 0) {

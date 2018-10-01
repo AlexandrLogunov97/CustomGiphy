@@ -96,13 +96,13 @@ class Autocomplete {
         });
     }
     static IsInclude(str1 = "", str2 = "") {
-        return str1.toString().toLowerCase().includes(str2.toString().toLowerCase());
+        return str1.trim().toLowerCase().includes(str2.trim().toLowerCase());
     }
     static AddAutofield(field, flag) {
-        if(field.length>0)
+        if(field.trim().length>0)
         SimpleDB.GetItems('autocomplete', (items) => {
             var item = items.find(x => {
-                if (x.field.toString().toLowerCase() === field.toString().toLowerCase()) {
+                if (x.field.trim().toLowerCase() === field.trim().toLowerCase()) {
                     return x;
                 }
             });
