@@ -28,9 +28,9 @@ function search() {
         selectedMode = 'gifs';
     }
     var query = document.getElementById('search').value;
-    if (query.length>0) {
+    if (query.length > 0) {
         document.getElementById('grid').innerHTML = '';
-        Autocomplete.AddAutofield(query,false);
+        Autocomplete.AddAutofield(query, false);
         client.Load(selectedMode, query, offest, (response) => {
             response.data.forEach((value) => {
                 GalleryGenerator.CreateItem(value.id, value.images.downsized_large.url);
@@ -51,7 +51,7 @@ function addFavorite() {
 function removeFavorite() {
     var element = document.getElementById(event.srcElement.id);
     document.getElementById(element.id + '_item').outerHTML = '';
-    client.RemoveFavorite(new Favorite(event.srcElement.id,element.getAttribute('dataurl')));
+    client.RemoveFavorite(new Favorite(event.srcElement.id, element.getAttribute('dataurl')));
 }
 function loadFavorites() {
     document.getElementById('grid').innerHTML = '';
@@ -63,56 +63,57 @@ function loadFavorites() {
     });
 }
 function searchFocused() {
-    var element=event.srcElement;
+    var element = event.srcElement;
     document.getElementById('autoComplete').style.display = 'block';
-    if(document.getElementById('search').value.length <= 0)
+    if (document.getElementById('search').value.length <= 0)
         Autocomplete.GenerateFavoritesAutofields();
     else
         Autocomplete.GenerateAutofields();
 }
-function setSearch(value){
-    if(value)
-    {   document.getElementById('search').value=value;
+function setSearch(value) {
+    if (value) {
+        document.getElementById('search').value = value;
         search();
         document.getElementById('autoComplete').style.display = 'none';
     }
 }
-function addFavoriteSearch(value){
-    //document.getElementById(value).outerHTML='';
+function addFavoriteSearch(value) {
+    if (document.getElementById('search').value.length > 0)
+        document.getElementById(event.srcElement.id).innerHTML = '-';
     Autocomplete.SetFavoriteAutofield(value);
     document.getElementById('search').focus();
-    
 }
-function removeFavoriteSearch(value,field){
+function removeFavoriteSearch(value, field) {
+
+    if (document.getElementById('search').value.length > 0)
+        document.getElementById(event.srcElement.id).innerHTML = '+';
+    else
+        document.getElementById(value).outerHTML = '';
     Autocomplete.RemoveFavoriteAutofield(field);
-    document.getElementById(value).outerHTML='';
     document.getElementById('search').focus();
 }
-function setAutoCompete(){
-    if(document.getElementById('search').value.length>0)
-    {
+function setAutoCompete() {
+    if (document.getElementById('search').value.length > 0) {
         Autocomplete.GenerateAutofields();
     }
-    else{
+    else {
         Autocomplete.GenerateFavoritesAutofields();
     }
-    if(event.keyCode===13)
-    {
+    if (event.keyCode === 13) {
         document.getElementById('autoComplete').style.display = 'none';
     }
 }
-function setAutoCompete2(){
- 
+function setAutoCompete2() {
+
 }
 function load() {
     if (client.CountFavorites > 0) {
         document.getElementById('favorites').hidden = false;
         loadFavorites();
     }
-    else
-    {
-        document.getElementById('favorites').className='btn btn-secondary el eq';
-        document.getElementById('gifs').className='btn btn-primary el eq';
+    else {
+        document.getElementById('favorites').className = 'btn btn-secondary el eq';
+        document.getElementById('gifs').className = 'btn btn-primary el eq';
     }
 }
 function scrollLoad() {

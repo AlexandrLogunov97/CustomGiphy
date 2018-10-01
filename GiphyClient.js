@@ -38,7 +38,7 @@ class GiphyClient {
             });
             if (item) {
                 var index = items.indexOf(items.find(x=>{ return x.id===favorite.id?x:null; }));
-                console.log(index);
+
                 if (index > -1) {
                     console.log(items.splice(index, 1));
                 }

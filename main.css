@@ -18,6 +18,7 @@ div.main{
     text-align: center;
     width: 5%;
     height: 50px;
+    font-weight: bold;
 }
 .search-help{
     margin-left: 20px;

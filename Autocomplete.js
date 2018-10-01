@@ -10,13 +10,14 @@ class Autocomplete {
     static CreateField(value) {
         var item = document.createElement('div');
         item.id = i + '_dropdownitem';
-        i++;
+
         item.className = 'search-help';
         var label = document.createElement('label');
         label.innerHTML = value.field;
         label.setAttribute('onclick', `setSearch("${value.field}")`);
         label.className = 'search-field';
         var button = document.createElement('button');
+        button.id=i;
         if (!value.favorite) {
             button.innerHTML = '+';
             button.setAttribute('onclick', `addFavoriteSearch("${value.field}")`);
@@ -29,6 +30,7 @@ class Autocomplete {
         button.className = 'btn btn-secondary add-favorite';
         item.appendChild(label);
         item.appendChild(button);
+        i++;
         return item;
     }
     static GenerateFavoritesAutofields(field = 'autoComplete') {
@@ -36,7 +38,7 @@ class Autocomplete {
         //localStorage.setItem('autocomplete',JSON.stringify([]));
         var element = document.getElementById(field);
         element.innerHTML = '';
-        
+        i=0;
         SimpleDB.GetItems('autocomplete', (items) => {
             items.forEach(item => {
                 if (item.favorite == true)
@@ -80,7 +82,7 @@ class Autocomplete {
         var element = document.getElementById(field);
         element.innerHTML = '';
         var query = document.getElementById('search').value;
-        
+        i=0;
         var counter = 0;
         SimpleDB.GetItems('autocomplete', (items) => {
             if (items.length > 0) {
