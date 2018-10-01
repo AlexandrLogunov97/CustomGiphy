@@ -11,7 +11,7 @@ class Autocomplete {
         var item = document.createElement('div');
         item.id = i + '_dropdownitem';
         i++;
-        item.className = 'dropdown-item search-help';
+        item.className = 'search-help';
         var label = document.createElement('label');
         label.innerHTML = value.field;
         label.setAttribute('onclick', `setSearch("${value.field}")`);
@@ -69,7 +69,7 @@ class Autocomplete {
             if (item) {
                 var index = items.indexOf(item);
                 items[index].favorite = true;
-                console.log(items[index]);
+                //console.log(items[index]);
                 SimpleDB.Save('autocomplete', items);
             }
         });
@@ -88,8 +88,8 @@ class Autocomplete {
                         if (this.IsInclude(item.field, query)) {
                             if(counter<5){
                                 element.appendChild(this.CreateField(item));
-                                counter++;
                             }
+                            counter++;
                         }
                     });
             }
@@ -99,9 +99,10 @@ class Autocomplete {
         return str1.toString().toLowerCase().includes(str2.toString().toLowerCase());
     }
     static AddAutofield(field, flag) {
+        if(field.length>0)
         SimpleDB.GetItems('autocomplete', (items) => {
             var item = items.find(x => {
-                if (x.toString().toLowerCase()===field.toString().toLowerCase()) {
+                if (x.field.toString().toLowerCase() === field.toString().toLowerCase()) {
                     return x;
                 }
             });
