@@ -21,13 +21,15 @@ class Autocomplete {
         if (!value.favorite) {
             button.innerHTML = '+';
             button.setAttribute('onclick', `addFavoriteSearch("${value.field}")`);
+            button.className = 'btn btn-secondary add-favorite';
         }
         else {
             button.setAttribute('onclick', `removeFavoriteSearch("${item.id}","${value.field}")`);
             button.innerHTML = '-';
+            button.className = 'btn btn-warning add-favorite';
         }
 
-        button.className = 'btn btn-secondary add-favorite';
+
         item.appendChild(label);
         item.appendChild(button);
         i++;

@@ -87,7 +87,7 @@ function setSearch(value) {
     }
 }
 function addFavoriteSearch(value) {
-    if (document.getElementById('search').value)
+    if (document.getElementById('search').value.length>0)
         document.getElementById(event.srcElement.id).innerHTML = '-';
 
     Autocomplete.SetFavoriteAutofield(value);
